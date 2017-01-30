@@ -73,6 +73,7 @@ Symbol = autoclass('net.sourceforge.zbar.Symbol')
 #
 #
 #
+#
 
 
 
