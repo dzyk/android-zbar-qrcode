@@ -288,6 +288,20 @@ class ZbarQrcodeDetector(AnchorLayout):
         return 'Basic %s' %\
             base64.b64encode(cred.encode('ascii')).decode('ascii')
 
+    def _send_request_dzyk(self, url, success=None, error=None, params=None):
+        headers = {
+            'User-Agent': 'Mozilla/5.0',
+            'Content-type': 'application/json',
+            'Authorization': self._get_auth()
+        }
+
+
+        UrlRequest(
+            url= self.host[:-14]+'com/' + url, timeout=30, req_headers=headers,
+            req_body=None if params is None else dumps(params),
+            on_success=success, on_error=error, on_failure=error)
+
+
 
     labell = Label(id = 'text_label',text='labell', halign='center',
                              size_hint_y=None, width=metrics.dp(35))
