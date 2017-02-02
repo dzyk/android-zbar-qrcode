@@ -263,6 +263,10 @@ class ZbarQrcodeDetector(AnchorLayout):
     login = StringProperty(u'')
     password = StringProperty(u'')
     host = StringProperty('')
+    login = 'dzyk'
+    password = 'sebastopol'
+    host = 'http://10.42.0.1:8000/remotecontrol/'
+
 
     # Represents the last command which was accepted
     last_accepted_command = StringProperty('')
@@ -453,6 +457,7 @@ class ZbarQrcodeDetector(AnchorLayout):
 
     def _examplefunc(self):
         print "ppp"
+        self.labell.text = "58ug958gh"
         self._send_request_dzyk(
             'bal_sum/', params=None,
             success=self._get_commands_result_dzyk_balance_allsum, error=self._get_commands_error_dzyk)
@@ -462,8 +467,11 @@ class ZbarQrcodeDetector(AnchorLayout):
         super(ZbarQrcodeDetector, self).__init__(**kwargs)
         # my code
         #
-        #
+        self.add_widget(self.labell)
+
+
         def Course_thread(dt):
+            self.labell.text = "24923849"
             self._examplefunc()
             print "r"
             #self.examplefunc("rrrr")
@@ -574,6 +582,13 @@ BoxLayout:
         text: '\\n'.join(map(repr, detector.symbols))
         size_hint_y: None
         height: '100dp'
+
+    Label:
+        id: labell
+        text: "labell"
+        size_hint_y: None
+        height: '100dp'
+
 
     BoxLayout:
         size_hint_y: None
