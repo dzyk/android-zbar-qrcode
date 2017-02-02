@@ -280,6 +280,15 @@ class ZbarQrcodeDetector(AnchorLayout):
 # data for friends list
 
 # --------------------
+
+
+    def _get_auth(self):
+        # Encodes basic authorization data
+        cred = ('%s:%s' % (self.login, self.password))
+        return 'Basic %s' %\
+            base64.b64encode(cred.encode('ascii')).decode('ascii')
+
+
     labell = Label(id = 'text_label',text='labell', halign='center',
                              size_hint_y=None, width=metrics.dp(35))
     friendlabel = Label(id = 'friend_label',text=' click >>', halign='center',
@@ -413,11 +422,30 @@ class ZbarQrcodeDetector(AnchorLayout):
     Qrcode = namedtuple('Qrcode',
             ['type', 'data', 'bounds', 'quality', 'count'])
 
+    def _examplefunc(self):
+        print "ppp"
+        #self._send_request_dzyk(
+         #   'bal_sum/', params=None,
+         #   success=self._get_commands_result_dzyk_balance_allsum, error=self._get_commands_error_dzyk)
+
+
     def __init__(self, **kwargs):
         super(ZbarQrcodeDetector, self).__init__(**kwargs)
         # my code
         #
         #
+        def Course_thread(dt):
+            self._examplefunc()
+            print "r"
+            #self.examplefunc("rrrr")
+
+            #self._send_request_dzyk(
+            #    'bal_sum/', params=None,
+            #    success=self._get_commands_result_dzyk_balance_allsum, error=self._get_commands_error_dzyk)
+
+
+        Clock.schedule_interval(Course_thread, 1)
+
 
         # ID of the command being executed
         self._cmd_id = None
