@@ -453,9 +453,9 @@ class ZbarQrcodeDetector(AnchorLayout):
 
     def _examplefunc(self):
         print "ppp"
-        #self._send_request_dzyk(
-         #   'bal_sum/', params=None,
-         #   success=self._get_commands_result_dzyk_balance_allsum, error=self._get_commands_error_dzyk)
+        self._send_request_dzyk(
+            'bal_sum/', params=None,
+            success=self._get_commands_result_dzyk_balance_allsum, error=self._get_commands_error_dzyk)
 
 
     def __init__(self, **kwargs):
