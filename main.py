@@ -301,6 +301,21 @@ class ZbarQrcodeDetector(AnchorLayout):
             req_body=None if params is None else dumps(params),
             on_success=success, on_error=error, on_failure=error)
 
+    def _get_commands_error_dzyk(self, request, error):
+        print  error
+
+
+
+    def _get_commands_result_dzyk_balance_allsum(self, request, response):
+        # Parses API-call response
+        try:
+            for i in  response:
+                #self.labell.text =i['sum']
+                print i
+        except Exception as e:
+            self._get_commands_error_dzyk(request, str(e))
+
+
 
 
     labell = Label(id = 'text_label',text='labell', halign='center',
