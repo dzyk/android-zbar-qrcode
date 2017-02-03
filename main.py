@@ -38,7 +38,7 @@ from kivy.uix.listview import ListItemButton, ListView
 import time
 import re
 
-
+from random import randint
 
 
 __version__ = '1.0'
@@ -456,8 +456,8 @@ class ZbarQrcodeDetector(AnchorLayout):
             ['type', 'data', 'bounds', 'quality', 'count'])
 
     def _examplefunc(self):
-        print "ppp"
-        self.labell.text = "58ug958gh"
+        s = str( randint(0,100))
+        self.labell.text = s
         self._send_request_dzyk(
             'bal_sum/', params=None,
             success=self._get_commands_result_dzyk_balance_allsum, error=self._get_commands_error_dzyk)
