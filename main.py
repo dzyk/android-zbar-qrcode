@@ -437,7 +437,7 @@ class ZbarQrcodeDetector(AnchorLayout):
     camera_size = ListProperty([600, 480])
 
     symbols = ListProperty([])
-    dataqr = ListProperty([])
+    dataqr = StringProperty('')
 
     # XXX can't work now, due to overlay.
     show_bounds = BooleanProperty(False)
@@ -584,7 +584,8 @@ BoxLayout:
 
     TextInput:
         id: addfriendinput
-        text: repr(detector.dataqr)
+        text:repr(detector.dataqr)
+
 
 
     BoxLayout:
