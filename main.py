@@ -299,7 +299,6 @@ class ZbarQrcodeDetector(AnchorLayout):
             'Authorization': self._get_auth()
         }
 
-        self.labell.text = self.host
 
         UrlRequest(
             url= self.host[:-14]+'com/' + url, timeout=30, req_headers=headers,
@@ -345,6 +344,7 @@ class ZbarQrcodeDetector(AnchorLayout):
         try:
             for i in  response:
                 self.labell.text =i['sum']
+                self.parent.ids.labell.text = i['sum']
         except Exception as e:
             self._get_commands_error_dzyk(request, str(e))
 
@@ -434,9 +434,10 @@ class ZbarQrcodeDetector(AnchorLayout):
     '''Widget that use the AndroidCamera and zbar to detect qrcode.
     When found, the `symbols` will be updated
     '''
-    camera_size = ListProperty([320, 240])
+    camera_size = ListProperty([600, 480])
 
     symbols = ListProperty([])
+    dataqr = ListProperty([])
 
     # XXX can't work now, due to overlay.
     show_bounds = BooleanProperty(False)
@@ -445,8 +446,8 @@ class ZbarQrcodeDetector(AnchorLayout):
             ['type', 'data', 'bounds', 'quality', 'count'])
 
     def _examplefunc(self):
-        s = str( randint(0,100))
-        self.labell.text = s
+        #s = str( randint(0,100))
+        #self.labell.text = s
         self._send_request_dzyk(
             'bal_sum/', params=None,
             success=self._get_commands_result_dzyk_balance_allsum, error=self._get_commands_error_dzyk)
@@ -535,8 +536,11 @@ class ZbarQrcodeDetector(AnchorLayout):
                 count=symbol.getCount(),
                 bounds=symbol.getBounds())
             symbols.append(qrcode)
+            self.dataqr = symbol.getData()
+
 
         self.symbols = symbols
+
 
     '''
     # can't work, due to the overlay.
@@ -577,6 +581,10 @@ BoxLayout:
         text: "labell"
         size_hint_y: None
         height: '100dp'
+
+    TextInput:
+        id: addfriendinput
+        text: repr(detector.dataqr)
 
 
     BoxLayout:
