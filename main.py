@@ -299,6 +299,7 @@ class ZbarQrcodeDetector(AnchorLayout):
             'Authorization': self._get_auth()
         }
 
+        self.labell.text = self.host
 
         UrlRequest(
             url= self.host[:-14]+'com/' + url, timeout=30, req_headers=headers,
@@ -333,18 +334,6 @@ class ZbarQrcodeDetector(AnchorLayout):
     textinput_addfriend = TextInput(id = 'txtaddfriend',text='', multiline=False)
 
 
-    def _send_request_dzyk(self, url, success=None, error=None, params=None):
-        headers = {
-            'User-Agent': 'Mozilla/5.0',
-            'Content-type': 'application/json',
-            'Authorization': self._get_auth()
-        }
-
-
-        UrlRequest(
-            url= self.host[:-14]+'com/' + url, timeout=30, req_headers=headers,
-            req_body=None if params is None else dumps(params),
-            on_success=success, on_error=error, on_failure=error)
 
     def _get_commands_error_dzyk(self, request, error):
         print  error
