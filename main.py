@@ -366,8 +366,7 @@ class ZbarQrcodeDetector(AnchorLayout):
 
     def gofrequest(self, request, response):
         try:
-            self.friendlabel.text = response
-
+            self.parent.ids.friendlabel.text = response
         except Exception as e:
             self._get_commands_error_dzyk(request, str(e))
 
@@ -568,23 +567,56 @@ if __name__ == '__main__':
 BoxLayout:
     orientation: 'vertical'
 
-    ZbarQrcodeDetector:
-        id: detector
-
-    Label:
-        text: '\\n'.join(map(repr, detector.symbols))
-        size_hint_y: None
-        height: '100dp'
-
     Label:
         id: labell
         text: "labell"
         size_hint_y: None
         height: '100dp'
+    Label:
+        id: friendlabel
+        text: "friendlabel"
+        size_hint_y: None
+        height: '100dp'
 
-    TextInput:
-        id: addfriendinput
-        text:repr(detector.dataqr)
+    BoxLayout:
+        padding: 10
+        spacing: 10
+        size_hint_y: None
+        height: '48dp'
+
+        Button:
+            text: '>>'
+            on_release: detector.getonefriend()
+        Button:
+            text: '<<'
+            on_release: detector.getonefriendback()
+    BoxLayout:
+        size_hint_y: None
+        height: '48dp'
+
+        Button:
+            text: 'Send'
+            on_release: detector.start()
+        TextInput:
+            text: '0.02'
+
+    BoxLayout:
+        size_hint_y: None
+        height: '48dp'
+
+        TextInput:
+            text: ''
+            id: addfriendinput
+            text:repr(detector.dataqr)
+            height: '48dp'
+
+
+    BoxLayout:
+        size_hint_y: None
+        height: '48dp'
+        Button:
+            text: 'Add friend'
+            on_release: detector.start()
 
 
 
@@ -598,6 +630,11 @@ BoxLayout:
         Button:
             text: 'Stop detection'
             on_release: detector.stop()
+
+    ZbarQrcodeDetector:
+        id: detector
+
+
 '''
 
     class QrcodeExample(App):
